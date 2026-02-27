@@ -2,14 +2,14 @@
 
 ## Cursor Cloud specific instructions
 
-This repository is currently an empty/skeleton project with only a `README.md`. There are no application services, dependencies, build steps, lint checks, or tests to run.
+This is a static single-page website (HTML/CSS/JS, no build tools or package manager).
 
-### Repository state
-- **Language/framework:** Not yet determined (no source code)
-- **Package manager:** None configured
-- **Services:** None
-- **Database/cache dependencies:** None
+### Running the site
+- Serve locally: `python3 -m http.server 8080` from the repo root, then open `http://localhost:8080/index.html`.
+- No build step, no linter, no test framework configured.
+- The portrait image is referenced as `photo.jpg` in the same directory as `index.html`.
 
-### Development notes
-- When application code is added, update this section with the relevant setup, build, lint, test, and run commands.
-- The update script (`echo "No dependencies to install"`) is a no-op placeholder; replace it once a real dependency file (e.g., `package.json`, `requirements.txt`, `go.mod`) is added.
+### Notes
+- The site uses Google Fonts (Inter) loaded via CDN — requires internet access.
+- All styles and scripts are inlined in `index.html`; no external CSS/JS files.
+- The update script is a no-op (`echo "No dependencies to install"`) since there are no installable dependencies.

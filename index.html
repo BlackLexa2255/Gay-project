@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Николай Батин — Преподаватель БГУИР</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white: #fbfbfd;
+      --black: #1d1d1f;
+      --gray: #86868b;
+      --gray-light: #f5f5f7;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--black);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0 clamp(24px, 5vw, 80px);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(251, 251, 253, .72);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      transition: background .3s;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: -.02em;
+      color: var(--black);
+    }
+    nav .nav-links { display: flex; gap: 28px; list-style: none; }
+    nav .nav-links a {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    nav .nav-links a:hover { color: var(--black); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px clamp(24px, 5vw, 80px) 80px;
+      background: linear-gradient(180deg, var(--white) 0%, var(--gray-light) 100%);
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+    .hero .subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      color: var(--gray);
+      max-width: 600px;
+      line-height: 1.4;
+      margin-bottom: 40px;
+    }
+    .hero-portrait {
+      width: clamp(220px, 30vw, 360px);
+      height: clamp(220px, 30vw, 360px);
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter .6s ease;
+    }
+    .hero-portrait:hover img { filter: grayscale(0%); }
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--gray);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      animation: float 2s ease-in-out infinite;
+    }
+    .scroll-hint svg { width: 20px; height: 20px; }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: clamp(80px, 12vw, 160px) clamp(24px, 5vw, 80px);
+    }
+
+    .section-dark {
+      background: var(--black);
+      color: var(--white);
+    }
+    .section-dark .section-label { color: var(--accent); }
+    .section-dark .section-text { color: rgba(255,255,255,.6); }
+
+    .section-light {
+      background: var(--gray-light);
+    }
+
+    .section-label {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .section-text {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.65;
+      max-width: 680px;
+    }
+
+    .center { text-align: center; margin-left: auto; margin-right: auto; }
+    .section-text.center { margin-left: auto; margin-right: auto; }
+
+    /* ─── QUOTE ─── */
+    .quote-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-block {
+      max-width: 900px;
+      text-align: center;
+    }
+    .quote-mark {
+      font-size: 8rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .18;
+      margin-bottom: -50px;
+      display: block;
+    }
+    .quote-text {
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .quote-attr {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    /* ─── STATS ─── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .3s ease, background .3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.1);
+    }
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      background: linear-gradient(135deg, #0071e3, #40a0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: .9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ─── VALUES ─── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .value-card {
+      padding: 40px 32px;
+      border-radius: 24px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.06);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    }
+    .value-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0071e3, #40a0ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    .value-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    .value-card p {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline {
+      max-width: 700px;
+      margin: 60px auto 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+    .timeline-item {
+      padding-left: 40px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--white);
+    }
+    .timeline-year {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+    .timeline-item h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+    }
+    .timeline-item p {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.55;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--gray-light);
+      border-top: 1px solid rgba(0,0,0,.06);
+    }
+    footer p {
+      font-size: .8rem;
+      color: var(--gray);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s cubic-bezier(.25,.46,.45,.94),
+                  transform .8s cubic-bezier(.25,.46,.45,.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav .nav-links { gap: 18px; }
+      nav .nav-links a { font-size: .75rem; }
+      .stats-grid { gap: 20px; }
+      .stat-card { padding: 28px 16px; }
+    }
+    @media (max-width: 480px) {
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Н. Батин</div>
+    <ul class="nav-links">
+      <li><a href="#about">О нём</a></li>
+      <li><a href="#philosophy">Философия</a></li>
+      <li><a href="#career">Карьера</a></li>
+      <li><a href="#values">Принципы</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-portrait reveal">
+      <img src="photo.jpg" alt="Николай Батин" />
+    </div>
+    <div class="hero-eyebrow reveal reveal-delay-1">Преподаватель БГУИР</div>
+    <h1 class="reveal reveal-delay-2">Николай Батин</h1>
+    <p class="subtitle reveal reveal-delay-3">Педагог, наставник, человек, который вдохновляет делать то, что правильно.</p>
+    <div class="scroll-hint">
+      <span>Листайте</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section section-dark" id="philosophy">
+    <div class="quote-block reveal">
+      <span class="quote-mark">&ldquo;</span>
+      <p class="quote-text">Легко делать то,<br>что правильно</p>
+      <p class="quote-attr">— Николай Батин</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="center">
+      <div class="section-label reveal">О преподавателе</div>
+      <h2 class="section-title reveal reveal-delay-1">Больше, чем лекции</h2>
+      <p class="section-text center reveal reveal-delay-2">
+        Николай Батин — преподаватель Белорусского государственного университета информатики и радиоэлектроники (БГУИР). Он известен своим неравнодушным подходом к обучению, глубоким пониманием предмета и умением вдохновлять студентов на осознанный выбор в профессии и жизни.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section-dark">
+    <div class="center">
+      <div class="section-label reveal">В цифрах</div>
+      <h2 class="section-title reveal reveal-delay-1">Путь в образовании</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number" data-count="1">БГУИР</div>
+        <div class="stat-label">Университет</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-1">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Вдохновлённых студентов</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Отдача делу</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER TIMELINE -->
+  <section class="section-light" id="career">
+    <div class="center">
+      <div class="section-label reveal">Карьера</div>
+      <h2 class="section-title reveal reveal-delay-1">Профессиональный путь</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-year">Образование</div>
+        <h3>БГУИР</h3>
+        <p>Окончил Белорусский государственный университет информатики и радиоэлектроники — один из ведущих технических вузов страны.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">Преподавание</div>
+        <h3>Кафедра БГУИР</h3>
+        <p>Начал преподавательскую деятельность в родном университете, сочетая академический подход с практическим опытом.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">Сегодня</div>
+        <h3>Наставник нового поколения</h3>
+        <p>Продолжает готовить будущих инженеров и IT-специалистов, передавая не только знания, но и жизненные принципы.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="values">
+    <div class="center">
+      <div class="section-label reveal">Принципы</div>
+      <h2 class="section-title reveal reveal-delay-1">Чему он учит</h2>
+      <p class="section-text center reveal reveal-delay-2">Не только формулам и алгоритмам — но и тому, как мыслить, решать и быть честным с собой.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">💡</div>
+        <h3>Ясность мысли</h3>
+        <p>Сложное нужно уметь объяснить просто. Понимание важнее заучивания.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">⚖️</div>
+        <h3>Делать правильно</h3>
+        <p>Философия, ставшая девизом: легко делать то, что правильно — если ты знаешь, что это.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">🎯</div>
+        <h3>Ответственность</h3>
+        <p>Каждое решение имеет последствия. Настоящий инженер думает на шаг вперёд.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Сделано с уважением к преподавателям, меняющим жизни.</p>
+    <p style="margin-top:8px"><a href="#">БГУИР</a> &middot; Минск, Беларусь</p>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
